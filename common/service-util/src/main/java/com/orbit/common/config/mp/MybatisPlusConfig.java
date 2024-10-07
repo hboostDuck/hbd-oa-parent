@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan("com.orbit.auth.mapper")
+@MapperScan("com.orbit.*.mapper")
 public class MybatisPlusConfig {
 
     /**
