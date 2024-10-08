@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Api(value = "审批类型", tags = "审批类型")
 @RestController
 @RequestMapping(value = "/admin/process/processType")
@@ -20,6 +22,13 @@ public class ProcessTypeController {
 
     @Autowired
     private ProcessTypeService processTypeService;
+
+    //查询所有审批分类
+    @GetMapping("findAll")
+    public Result findAll() {
+        List<ProcessType> list = processTypeService.list();
+        return Result.ok(list);
+    }
 
     @PreAuthorize("hasAuthority('bnt.processType.list')")
     @ApiOperation(value = "获取分页列表")
@@ -62,4 +71,6 @@ public class ProcessTypeController {
         processTypeService.removeById(id);
         return Result.ok();
     }
+
+
 }

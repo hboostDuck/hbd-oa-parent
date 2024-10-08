@@ -3,6 +3,7 @@ server:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 查看日志
+  mapper-locations: classpath:com/orbit/*/mapper/xml/*.xml
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
@@ -40,3 +41,8 @@ spring:
     history-level: full
     #校验流程文件，默认校验resources下的process 文件夹的流程文件
     check-process-definitions: true
+wechat:
+  mpAppId: wxc8adf6eb97549cae
+  mpAppSecret: 3a67a367bfbe91441f0ce02fa1419b1f
+  # 授权回调获取用户信息接口地址
+  userInfoUrl: http://ggkt2.vipgz1.91tunnel.com/admin/wechat/userInfo

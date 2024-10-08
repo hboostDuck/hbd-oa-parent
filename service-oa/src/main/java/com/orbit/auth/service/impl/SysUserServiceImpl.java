@@ -8,6 +8,7 @@ import com.orbit.auth.service.SysUserService;
 import com.orbit.auth.util.MenuHelper;
 import com.orbit.model.system.SysMenu;
 import com.orbit.model.system.SysUser;
+import com.orbit.security.custom.LoginUserInfoHelper;
 import com.orbit.vo.system.MetaVo;
 import com.orbit.vo.system.RouterVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +57,24 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         result.put("buttons", permsList);
         result.put("routers", routerVoList);
         return result;
+    }
+
+//    @Autowired
+//    private SysDeptService sysDeptService;
+//
+//    @Autowired
+//    private SysPostService sysPostService;
+
+    @Override
+    public Map<String, Object> getCurrentUser() {
+        SysUser sysUser = baseMapper.selectById(LoginUserInfoHelper.getUserId());
+        //SysDept sysDept = sysDeptService.getById(sysUser.getDeptId());
+        //SysPost sysPost = sysPostService.getById(sysUser.getPostId());
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", sysUser.getName());
+        map.put("phone", sysUser.getPhone());
+        //map.put("deptName", sysDept.getName());
+        //map.put("postName", sysPost.getName());
+        return map;
     }
 }

@@ -87,4 +87,6 @@ public class SysUserController {
         service.removeById(id);
         return Result.ok();
     }
+
+
 }

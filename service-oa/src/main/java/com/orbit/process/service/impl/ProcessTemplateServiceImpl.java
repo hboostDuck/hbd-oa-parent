@@ -3,11 +3,13 @@ package com.orbit.process.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.orbit.model.process.ProcessTemplate;
 import com.orbit.model.process.ProcessType;
 import com.orbit.process.mapper.ProcessTemplateMapper;
+import com.orbit.process.service.ProcessService;
 import com.orbit.process.service.ProcessTemplateService;
 import com.orbit.process.service.ProcessTypeService;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,9 @@ public class ProcessTemplateServiceImpl extends ServiceImpl<ProcessTemplateMappe
 
     @Resource
     private ProcessTypeService processTypeService;
+
+    @Resource
+    private ProcessService processService;
 
     @Override
     public IPage<ProcessTemplate> selectPage(Page<ProcessTemplate> pageParam) {
@@ -59,7 +64,10 @@ public class ProcessTemplateServiceImpl extends ServiceImpl<ProcessTemplateMappe
         processTemplate.setStatus(1);
         processTemplateMapper.updateById(processTemplate);
 
-        //TODO 部署流程定义，后续完善
+        if (StringUtils.isNotBlank(processTemplate.getProcessDefinitionPath())){
+            processService.deployByZip(processTemplate.getProcessDefinitionPath());
+        }
+
     }
 }
 
