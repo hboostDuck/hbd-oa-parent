@@ -75,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/admin/modeler/**","/diagram-viewer/**","/editor-app/**","/*.html",
-                "/admin/processImage/**",
+                "/admin/processImage/**","/admin/wechat/bindPhone",
                 "/admin/wechat/authorize","/admin/wechat/userInfo","/admin/wechat/bindPhone",
                 "/favicon.ico","/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**", "/doc.html");
     }

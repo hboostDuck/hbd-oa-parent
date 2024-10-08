@@ -12,6 +12,7 @@ import com.orbit.model.process.ProcessRecord;
 import com.orbit.model.process.ProcessTemplate;
 import com.orbit.model.system.SysUser;
 import com.orbit.process.mapper.ProcessMapper;
+import com.orbit.process.service.MessageService;
 import com.orbit.process.service.ProcessRecordService;
 import com.orbit.process.service.ProcessService;
 import com.orbit.process.service.ProcessTemplateService;
@@ -75,7 +76,8 @@ public class ProcessServiceImpl extends ServiceImpl<ProcessMapper, Process> impl
 
     @Autowired
     private ProcessRecordService processRecordService;
-
+    @Autowired
+    private MessageService messageService;
 
     @Autowired
     private HistoryService historyService;
@@ -144,7 +146,8 @@ public class ProcessServiceImpl extends ServiceImpl<ProcessMapper, Process> impl
                 SysUser user = sysUserService.getByUsername(task.getAssignee());
                 assigneeList.add(user.getName());
 
-                //todo 推送消息给下一个审批人，后续完善
+                //推送消息给下一个审批人
+                messageService.pushPendingMessage(process.getId(), sysUser.getId(), task.getId());
             }
             process.setDescription("等待" + StringUtils.join(assigneeList.toArray(), ",") + "审批");
         }
@@ -244,6 +247,7 @@ public class ProcessServiceImpl extends ServiceImpl<ProcessMapper, Process> impl
                 assigneeList.add(sysUser.getName());
 
                 //推送消息给下一个审批人
+                messageService.pushPendingMessage(process.getId(), sysUser.getId(), task.getId());
             }
             process.setDescription("等待" + StringUtils.join(assigneeList.toArray(), ",") + "审批");
             process.setStatus(1);
@@ -257,6 +261,7 @@ public class ProcessServiceImpl extends ServiceImpl<ProcessMapper, Process> impl
             }
         }
         //推送消息给申请人
+        messageService.pushProcessedMessage(process.getId(), process.getUserId(), approvalVo.getStatus());
         this.updateById(process);
     }
 

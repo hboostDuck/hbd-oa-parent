@@ -2,7 +2,7 @@ server:
   port: 8800
 mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 查看日志
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
   mapper-locations: classpath:com/orbit/*/mapper/xml/*.xml
 spring:
   datasource:
@@ -44,5 +44,5 @@ spring:
 wechat:
   mpAppId: wxc8adf6eb97549cae
   mpAppSecret: 3a67a367bfbe91441f0ce02fa1419b1f
-  # 授权回调获取用户信息接口地址
-  userInfoUrl: http://ggkt2.vipgz1.91tunnel.com/admin/wechat/userInfo
+  # 授权回调获取用户信息接口地址   oa.dailysmile.online
+  userInfoUrl: http://oa.clouddz.top/admin/wechat/userInfo

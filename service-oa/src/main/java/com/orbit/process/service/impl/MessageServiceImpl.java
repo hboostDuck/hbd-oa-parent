@@ -47,12 +47,12 @@ public class MessageServiceImpl implements MessageService {
         String openid = sysUser.getOpenId();
         //方便测试，给默认值（开发者本人的openId）
         if(StringUtils.isEmpty(openid)) {
-            openid = "omwf25izKON9dktgoy0dogqvnGhk";
+            openid = "oTJCBMUJFOciMlwAGE";
         }
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
         .toUser(openid)//要推送的用户openid
-        .templateId("KvOVeW7jz4-DZgQ_WuXjMZO5I4pPA7L7fflVNwC_ZQg")//模板id
-        .url("http://oa.atguigu.cn/#/show/"+processId+"/"+taskId)//点击模板消息要访问的网址
+        .templateId("nGQQBWVBofUzsY8oRVk0pfcH0NBuEho-EA4_alaxagc")//模板id
+        .url("http://oa1.clouddz.top/#/show/"+processId+"/"+taskId)//点击模板消息要访问的网址
         .build();
         JSONObject jsonObject = JSON.parseObject(process.getFormValues());
         JSONObject formShowData = jsonObject.getJSONObject("formShowData");
@@ -77,12 +77,12 @@ public class MessageServiceImpl implements MessageService {
         SysUser currentSysUser = sysUserService.getById(LoginUserInfoHelper.getUserId());
         String openid = sysUser.getOpenId();
         if(StringUtils.isEmpty(openid)) {
-            openid = "omwf25izKON9dktgoy0dogqvnGhk";
+            openid = "oTJCB6ox6R7MUJFOciMlwAGE";
         }
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
                 .toUser(openid)//要推送的用户openid
-                .templateId("I0kVeto7T0WIDP6tyoHh-hx83wa9_pe7Nx9eT93-6sc")//模板id
-                .url("http://oa.atguigu.cn/#/show/"+processId+"/0")//点击模板消息要访问的网址
+                .templateId("qCRaseyKInHBFSrXtzQC-vEEGuZ1z46_RHo4cGCM3Ik")//模板id
+                .url("http://oa1.clouddz.top/#/show/"+processId+"/0")//点击模板消息要访问的网址
                 .build();
         JSONObject jsonObject = JSON.parseObject(process.getFormValues());
         JSONObject formShowData = jsonObject.getJSONObject("formShowData");

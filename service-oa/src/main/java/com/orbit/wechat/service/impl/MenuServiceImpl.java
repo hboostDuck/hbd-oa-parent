@@ -64,7 +64,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
             one.put("name", oneMenuVo.getName());
             if(CollectionUtils.isEmpty(oneMenuVo.getChildren())) {
                 one.put("type", oneMenuVo.getType());
-                one.put("url", "http://oa.atguigu.cn/#"+oneMenuVo.getUrl());
+                one.put("url", "http://oa1.clouddz.top/#"+oneMenuVo.getUrl());
             } else {
                 JSONArray subButton = new JSONArray();
                 for(MenuVo twoMenuVo : oneMenuVo.getChildren()) {
@@ -73,7 +73,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
                     if(twoMenuVo.getType().equals("view")) {
                         view.put("name", twoMenuVo.getName());
                         //H5页面地址
-                        view.put("url", "http://oa.atguigu.cn#"+twoMenuVo.getUrl());
+                        view.put("url", "http://oa1.clouddz.top#"+twoMenuVo.getUrl());
                     } else {
                         view.put("name", twoMenuVo.getName());
                         view.put("key", twoMenuVo.getMeunKey());

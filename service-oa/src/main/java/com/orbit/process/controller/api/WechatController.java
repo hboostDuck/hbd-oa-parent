@@ -39,6 +39,7 @@ public class WechatController {
     @GetMapping("/authorize")
     public String authorize(@RequestParam("returnUrl") String returnUrl, HttpServletRequest request) {
         //由于授权回调成功后，要返回原地址路径，原地址路径带“#”号，当前returnUrl获取带“#”的url获取不全，因此前端把“#”号替换为“guiguoa”了，这里要还原一下
+        log.info("【微信网页授权】returnUrl={}", returnUrl);
         String redirectURL = wxMpService.getOAuth2Service().buildAuthorizationUrl(userInfoUrl, WxConsts.OAuth2Scope.SNSAPI_USERINFO, URLEncoder.encode(returnUrl.replace("guiguoa", "#")));
         log.info("【微信网页授权】获取code,redirectURL={}", redirectURL);
         return "redirect:" + redirectURL;
@@ -82,6 +83,7 @@ public class WechatController {
             String token = JwtHelper.createToken(sysUser.getId(), sysUser.getUsername());
             return Result.ok(token);
         } else {
+            log.info("手机号码不存在，绑定失败");
             return Result.fail("手机号码不存在，绑定失败");
         }
     }
